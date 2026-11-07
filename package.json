@@ -15,6 +15,22 @@
       {
         "command": "copyForAI.copy",
         "title": "Copy for AI"
+      },
+      {
+        "command": "copyForAI.copyLimitedTree",
+        "title": "Copy for AI (Limited Directory Tree)"
+      },
+      {
+        "command": "copyForAI.copyFullTree",
+        "title": "Copy for AI (Full Directory Tree)"
+      },
+      {
+        "command": "copyForAI.directoryTree",
+        "title": "Directory Tree for AI"
+      },
+      {
+        "command": "copyForAI.openSettings",
+        "title": "Copy for AI: Open Settings"
       }
     ],
     "menus": {
@@ -23,8 +39,53 @@
           "command": "copyForAI.copy",
           "when": "resourceScheme == file || explorerResourceIsFolder",
           "group": "navigation"
+        },
+        {
+          "command": "copyForAI.copyLimitedTree",
+          "when": "resourceScheme == file || explorerResourceIsFolder",
+          "group": "navigation"
+        },
+        {
+          "command": "copyForAI.copyFullTree",
+          "when": "resourceScheme == file || explorerResourceIsFolder",
+          "group": "navigation"
         }
       ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "copyForAI",
+          "title": "Copy for AI",
+          "icon": "$(file-code)"
+        }
+      ]
+    },
+    "views": {
+      "copyForAI": [
+        {
+          "id": "copyForAI.settings",
+          "name": "Settings"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Copy for AI",
+      "properties": {
+        "copyForAI.directoryTree.ignoreFolders": {
+          "type": "array",
+          "default": [
+            "node_modules",
+            ".git",
+            "dist",
+            ".vscode"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "description": "Folders ignored when generating directory trees."
+        }
+      }
     }
   },
   "scripts": {
@@ -42,19 +103,22 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.125.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "24.x",
-    "typescript-eslint": "^8.61.1",
-    "eslint": "^10.5.0",
+    "@types/vscode": "^1.125.0",
+    "@vscode/test-cli": "^0.0.15",
+    "@vscode/test-electron": "^3.0.0",
     "esbuild": "^0.28.1",
+    "eslint": "^10.5.0",
     "npm-run-all": "^4.1.5",
     "typescript": "^6.0.3",
-    "@vscode/test-cli": "^0.0.15",
-    "@vscode/test-electron": "^3.0.0"
+    "typescript-eslint": "^8.61.1"
   },
   "overrides": {
     "diff": "^8.0.4",
     "serialize-javascript": "^7.0.6"
+  },
+  "dependencies": {
+    "js-tiktoken": "^1.0.21"
   }
 }
